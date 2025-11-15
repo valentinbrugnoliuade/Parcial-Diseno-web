@@ -1,9 +1,9 @@
 (function () {
     const DARK_KEY = 'uade_dark_mode';
-    const DARK_CLASS = 'dark-mode';
+    const DARK_CLASS = 'dark';
 
     function applyDarkMode(enabled) {
-        document.documentElement.classList.toggle(DARK_CLASS, !!enabled);
+        document.body.classList.toggle(DARK_CLASS, !!enabled);
         localStorage.setItem(DARK_KEY, enabled ? '1' : '0');
         document.querySelectorAll('[data-dark-toggle]').forEach(el => {
             if (el.type === 'checkbox') el.checked = !!enabled;
@@ -16,9 +16,14 @@
         const enabled = saved === '1';
         applyDarkMode(enabled);
 
-        document.querySelectorAll('[data-dark-toggle]').forEach(el => {
+        const toggles = Array.from(document.querySelectorAll('[data-dark-toggle]'));
+        const legacy = document.getElementById('darkToggle');
+        if (legacy && !toggles.includes(legacy)) toggles.push(legacy);
+
+        toggles.forEach(el => {
+            if (!el) return;
             el.addEventListener('click', (e) => {
-                const next = el.type === 'checkbox' ? el.checked : !document.documentElement.classList.contains(DARK_CLASS);
+                const next = el.type === 'checkbox' ? el.checked : !document.body.classList.contains(DARK_CLASS);
                 applyDarkMode(next);
             });
         });

@@ -169,3 +169,48 @@ body.dark{
     .site-header{ gap:8px; }
     .site-footer{ flex-direction:column; align-items:center; text-align:center; }
 }
+
+/* Dark mode toggle (luna) */
+#darkToggle{
+    width:36px;
+    height:36px;
+    padding:0;
+    border-radius:50%;
+    background: rgba(255,255,255,0.15);
+    color:#fff;
+    display:inline-block;
+    position:relative;
+    border:0;
+    cursor:pointer;
+}
+#darkToggle::before{
+    content:"";
+    position:absolute;
+    left:10px;
+    top:10px;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff;
+    transition:all .18s ease;
+}
+#darkToggle::after{
+    content:"";
+    position:absolute;
+    left:14px;
+    top:8px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--bg);
+    transition:all .18s ease;
+}
+body.dark #darkToggle{
+    background: rgba(255,255,255,0.06);
+}
+body.dark #darkToggle::before{
+    background:#ffdca3;
+}
+body.dark #darkToggle::after{
+    background:var(--bg);
+}
